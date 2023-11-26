@@ -1,0 +1,27 @@
+{
+  "name": "@text-canvas",
+  "version": "1.0.0",
+  "description": "text based canvas",
+  "main": "index.js",
+  "scripts": {
+    "test": "node sample.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zdlbad/textCanvas.git"
+  },
+  "keywords": [
+    "textbased",
+    "console",
+    "terminal",
+    "canvas",
+    "diagram",
+    "draw"
+  ],
+  "author": "dlzhang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zdlbad/textCanvas/issues"
+  },
+  "homepage": "https://github.com/zdlbad/textCanvas#readme"
+}
