@@ -43,6 +43,9 @@ class CoordinateMap extends Drawable {
     let minX = Math.min(...data.map(d => d[xKey]));
     let maxY = Math.max(...data.map(d => d[yKey]));
     let minY = Math.min(...data.map(d => d[yKey]));
+    if ([maxX,minX,maxY,minY].includes(NaN)) throw new Error('Failed to calculate axis range. NaN found.');
+    if (maxX === minX) minX = maxX/2; if (maxX === minX) maxX = 100;
+    if (maxY === minY) minY = maxY/2; if (minY === maxY) maxY = 100; // if both 0, set to a postive number
     const xScale = (maxX-minX)/(this.toX-this.fromX - 2*extendedRange*xBit);
     const yScale = (maxY-minY)/(this.toY-this.fromY - 2*extendedRange);
     minY -= 1*extendedRange*yScale;
@@ -93,7 +96,9 @@ class CoordinateMap extends Drawable {
     for (let d of data) {
       const x = this.fromX+Math.ceil((d[xKey]-minX)/xScale); // magnet to next x scale
       const y = this.fromY+Math.ceil((d[yKey]-minY)/yScale);
-      this.dataPoints.push(new Point(x, y, this.z+1, this.marksMap[d[typeKey]], this.color));
+      const point = new Point(x, y, this.z+1, this.marksMap[d[typeKey]], this.color);
+      point['type'] = d[typeKey];
+      this.dataPoints.push(point);
     }
     
   }
@@ -115,7 +120,8 @@ class CoordinateMap extends Drawable {
       // points.push(... new Square(this.toX,this.toY-keys.length-2,this.z,10,keys.length+2,'solid',this,this.color).toPixels());
 
       keys.forEach((k,i) => {
-        const legend = new Text(this.toX+4-k.length, this.toY+1-i, this.z, `${k} : ${this.marksMap[k]}`, 'horizontal', this.color)
+        const dataCount = this.dataPoints.filter(d => d.type === k).length;
+        const legend = new Text(this.toX+4-k.length, this.toY+1-i, this.z, `${k} : ${this.marksMap[k]} (${dataCount})`, 'horizontal', this.color)
         pixels.push(...legend.toPixels());
       })
     }
