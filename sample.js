@@ -10,6 +10,6 @@ const data = [
   {x:150, y:100, type:'B'},
   {x:160, y:90, type:'B'},
 ]
-canvas.add(new CoordinateMap(10,2,90,15,10,data,'x', 'xLabel', 'y', 'yLabel', 'type', 'yellow', false));
+canvas.add(new CoordinateMap(10,2,90,15,10,data,'x', 'xLabel', 'y', 'yLabel', 'type', 'yellow', true));
 
 canvas.render();

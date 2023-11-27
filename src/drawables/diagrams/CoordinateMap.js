@@ -67,7 +67,7 @@ class CoordinateMap extends Drawable {
       const keys = Object.keys(this.marksMap).sort((pre,next)=> pre>next?1:-1); //asc sort
       if (keys.length > 0) {
         keys.forEach(k => {
-          const points = data.filter(d => d[typeKey]===k).sort((pre,next)=> pre.x>next.x?1:-1);
+          const points = data.filter(d => d[typeKey]===k).sort((pre,next)=> pre[xKey]>next[xKey]?1:-1);
           if (points.length === 1) {
             const x = this.fromX+Math.ceil((points[0][xKey]-minX)/xScale); // magnet to next x scale
             const y = this.fromY+Math.ceil((points[0][yKey]-minY)/yScale);
@@ -77,10 +77,10 @@ class CoordinateMap extends Drawable {
             for (let i=0; i<points.length-1; i++) {
               const p1 = points[i]; let p2 = points[i+1];
               const line = new Line(
-                this.fromX+Math.ceil((p1.x-minX)/xScale),
-                this.fromY+Math.ceil((p1.y-minY)/yScale),
-                this.fromX+Math.ceil((p2.x-minX)/xScale),
-                this.fromY+Math.ceil((p2.y-minY)/yScale),
+                this.fromX+Math.ceil((p1[xKey]-minX)/xScale),
+                this.fromY+Math.ceil((p1[yKey]-minY)/yScale),
+                this.fromX+Math.ceil((p2[xKey]-minX)/xScale),
+                this.fromY+Math.ceil((p2[yKey]-minY)/yScale),
                 this.z,this.color,'solid');
               this.dataLines.push(line);
             }
