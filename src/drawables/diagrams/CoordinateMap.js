@@ -37,9 +37,9 @@ class CoordinateMap extends Drawable {
   }
 
   initData(data, xKey, yKey, typeKey, lineUp) {
-    const xBit = 3;
     const extendedRange = 1; // extend range start and end by how many scales
     let maxX = Math.max(...data.map(d => d[xKey]));
+    const xBit = maxX.toFixed(0).length + 2; // decided a max text length on X axis
     let minX = Math.min(...data.map(d => d[xKey]));
     let maxY = Math.max(...data.map(d => d[yKey]));
     let minY = Math.min(...data.map(d => d[yKey]));
