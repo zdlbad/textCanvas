@@ -67,7 +67,9 @@ class Line extends Drawable{
       const nextPixel = {x:x+1, y:this.fromY + Math.floor((x+1-this.fromX)*this.k)};
       // decide what to fill for this point
       const prePixel = {x:x-1, y:this.fromY + Math.floor((x-1-this.fromX)*this.k)};
-      const tempK = (nextPixel.y-prePixel.y)/(nextPixel.x-prePixel.x);
+      // const tempK = (nextPixel.y-prePixel.y)/(nextPixel.x-prePixel.x);
+      // const tempK = (nextPixel.y-y)/(nextPixel.x-x);
+      const tempK = (y-prePixel.y)/(x-prePixel.x);
       const fill = this.getFill(tempK);
       pixels.push(new Pixel(x, y, this.z, fill, this.color));
 
